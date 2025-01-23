@@ -115,3 +115,23 @@ button:hover {
 .redirect a:hover {
     text-decoration: underline;
 }
+/* Forgot Password Button */
+.forgot-password {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.forgot-password button {
+    background: none;
+    border: none;
+    color: #6a11cb;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: 0.3s ease;
+}
+
+.forgot-password button:hover {
+    color: #2575fc;
+}

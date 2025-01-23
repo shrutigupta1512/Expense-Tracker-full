@@ -73,3 +73,95 @@ form button:hover {
 .delete-btn:hover {
     background-color: darkred;
 }
+/* Sidebar */
+.sidebar {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.menu-toggle {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.menu {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.menu-item {
+    display: block;
+    margin: 5px 0;
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background: #0056b3;
+}
+/* Section visibility control */
+.report-section, .leaderboard-section {
+    display: none;
+}
+
+/* Leaderboard Section */
+.leaderboard-section {
+    margin-top: 20px;
+}
+
+.leaderboard-section h2 {
+    color: #333;
+}
+
+#leaderboard-list {
+    list-style: none;
+    padding: 0;
+}
+
+#leaderboard-list li {
+    padding: 10px;
+    background: #f9f9f9;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#pagination-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pagination-controls button, #pagination-controls select {
+    margin: 0 5px;
+    padding: 5px 10px;
+}
+button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#back-from-leaderboard, #back-from-report {
+    margin-top: 20px;
+    background-color: #6c757d;
+}
+
+#back-from-leaderboard:hover, #back-from-report:hover {
+    background-color: #5a6268;
+}

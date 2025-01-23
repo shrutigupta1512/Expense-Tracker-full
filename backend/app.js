@@ -2,9 +2,8 @@
 require('dotenv').config();
 
 console.log('__dirname:', __dirname); // Should print the full path to the backend folder
-console.log(process.env.JWT_SECRET); // Should output "mysecretkey"
+console.log(process.env.JWT_SECRET); // Should output the secret key
 console.log('Environment Variables:', process.env);
-
 
 const express = require('express');
 const path = require('path');
@@ -16,6 +15,11 @@ const jwt = require('jsonwebtoken');
 // Import Routes
 const expenseRoutes = require('./routes/expenseRoutes');
 const authenticate = require('./middleware/authenticate');
+const premiumRoute = require('./routes/premium');
+const userRoutes = require('./routes/userRoutes'); // Import userRoutes
+const leaderboardRoutes = require('./routes/leaderboardRoutes');
+const forgotPasswordRoutes = require('./routes/forgotPasswordRoutes');
+const reportRoutes = require('./routes/reportRoutes');
 
 // Import db from database.js
 const db = require('./database');
@@ -24,13 +28,13 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:4000', // Adjust to match your frontend URL
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: '*', // Allows all origins
 }));
+
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Serve static pages
+// Serve static pages (Ensure you have correct paths for static files)
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/views/signup.html'));
 });
@@ -40,6 +44,7 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+    console.log('Login route hit');
     res.sendFile(path.join(__dirname, '../frontend/views/login.html'));
 });
 
@@ -100,17 +105,28 @@ app.post('/login', async (req, res) => {
         if (!process.env.JWT_SECRET) {
             return res.status(500).json({ message: 'JWT secret is missing from environment variables' });
         }
-
+        
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ message: 'User logged in successfully', token });
+        res.status(200).json({ message: 'User logged in successfully', token, userid: user.id });
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).json({ message: 'Database error' });
     }
 });
 
-// Routes
+// Routes for other parts of your application
 app.use('/expenses', expenseRoutes);
+app.use('/premium', premiumRoute);
+app.use('/users', userRoutes);
+app.use('/leaderboard', leaderboardRoutes);
+app.use('/password', forgotPasswordRoutes);
+app.use('/report', authenticate, reportRoutes);
 
+// Fallback route to serve signup.html for unknown paths
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/views/signup.html'));
+});
+
+// Start the server
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`)); 
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

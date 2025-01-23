@@ -9,6 +9,22 @@
 <body>
     <div class="container">
         <h1>Expense Tracker</h1>
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar">
+            <button id="toggle-menu" class="menu-toggle">=</button>
+            <div id="menu" class="menu" style="display: none;">
+                <button id="leaderboard-btn" class="menu-item">🏆 Leaderboard</button>
+                <button id="report-btn" class="menu-item">📊 Report</button>
+            </div>
+        </div>
+        
+        <!-- Buy Premium Button -->
+        <button id="buy-premium" style="position: absolute; top: 10px; right: 10px;">
+            Buy Premium
+        </button>
+        <div id="premium-status" style="display: none;">You are a premium user now!</div>
+
+        
         <div class="form-section">
             <form id="expense-form">
                 <input type="number" id="amount" placeholder="Amount" required>
@@ -23,11 +39,47 @@
                 <button type="submit">Add Expense</button>
             </form>
         </div>
+        
         <div class="expenses-section">
             <h2>Your Expenses</h2>
             <ul id="expense-list"></ul>
         </div>
+     <!-- Leaderboard Section -->
+     <div class="leaderboard-section" style="display: none;">
+        <h2>Leaderboard</h2>
+        <ul id="leaderboard-list"></ul>
+        <button id="back-from-leaderboard">Back to Expenses</button>
     </div>
+
+
+    <div id="report-section" class="report-section" style="display: none;">
+        <h2>Expense Report</h2>
+        
+        <div>
+            <button id="download-report-btn">Download Report</button>
+            <a id="report-link" href="#" style="display:none;">Download Your Report</a>
+        </div>
+        <div>
+            <h3>Download History</h3>
+            <ul id="download-history"></ul>
+    </div>
+    <button id="back-from-report">Back to Expenses</button>
+</div>
+
+<div id="pagination-controls">
+    <button id="prev-page-btn" disabled>Previous</button>
+    <select id="page-size">
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+    </select>
+    <button id="next-page-btn" disabled>Next</button>
+</div>
+    
+    <!-- Razorpay Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <!-- Expense Tracker Script -->
     <script src="../js/expense.js"></script>
 </body>
 </html>
